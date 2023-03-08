@@ -24,7 +24,7 @@ public class Task3 {
     public static void calculateMaxAreaForTask3(int m, int n, int h, int[][] plot){
 
         /**
-         * Opt(i,j) denotes the max square length of the plot that has (i,j) as the righmost bottom point.
+         * Opt(i,j) denotes the max square length of the plot with h trees and that has (i,j) as the righmost bottom point.
          * Goal Find max of all Opt(i,j)
          * Belman's equation: 
          * Opt(i,j) = 0 if plot[i][j] < h
