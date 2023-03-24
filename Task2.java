@@ -8,9 +8,13 @@ public class Task2 {
         int m,n,h;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String input[] = br.readLine().trim().split(" ");
+        // Number of rows
         m = Integer.parseInt(input[0]);
+        // Number of columns
         n = Integer.parseInt(input[1]);
         h = Integer.parseInt(input[2]);
+
+        // Store the input plot in a m*n array
         int plot[][] = new int[m][n];
         for(int i=0; i<m;i++){
             input = br.readLine().trim().split(" ");
@@ -25,8 +29,11 @@ public class Task2 {
 
         int ans[] = new int[4];
         Arrays.fill(ans,-1);
+
+        // Intially the max area of the largest subsquare possible is 0
         int maxArea = 0;
-        // Iterate through each and every plot
+        
+        // Iterate through each and every plot considering it as top left corner
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 // We need to check this plot only if it satisfies the min tree condition

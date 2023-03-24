@@ -8,9 +8,13 @@ public class Task3 {
         int m,n,h;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String input[] = br.readLine().trim().split(" ");
+        // Number or rows
         m = Integer.parseInt(input[0]);
+        // Number of columns
         n = Integer.parseInt(input[1]);
         h = Integer.parseInt(input[2]);
+
+        // Store the input in a m*n array
         int plot[][] = new int[m][n];
         for(int i=0; i<m;i++){
             input = br.readLine().trim().split(" ");
@@ -82,6 +86,7 @@ public class Task3 {
         System.out.println(x1+" "+y1+ " "+x2+" "+y2);
     }
 
+    // Function to return the minimum of three numbers
     public static int getMinimum(int a, int b, int c){
         return a > b ? ((b > c) ? c : b) :( (a > c) ? c : a);
     }
