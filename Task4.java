@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Arrays;
 
 public class Task4 {
     public static void main(String args[]) throws IOException{
@@ -24,40 +25,28 @@ public class Task4 {
 
     public static void calculateMaxAreaForTask4(int m, int n, int h, int[][] plot){
 
-        //Precompute the number of valid plots present from (0,0) to each point (i,j) and store it in valid[i][j]
-        int valid[][] = new int[m][n];
+         /*Precompute the number of valid plots present from (0,0) to each point (i,j) and store it in valid[i][j]
+        * Add a extra row and coloum for easy implentation
+        */
+        int valid[][] = new int[m+1][n+1];
 
-        // Precopmute the number of valid plots from (0,0) to (0,i) i.e is first row 
-        for(int i=0;i<n;i++){
-            if(plot[0][i] >=h){
-                valid[0][i] = ((i-1)>=0) ? 1 + valid[0][i-1] : 1; 
-            }
-            else{
-                valid[0][i] = ((i-1)>=0) ? valid[0][i-1] : 0; 
-            }
-        }
-
-        // Precopmute the number of valid plots from (0,0) to (i,0) i.e is first column
-        for(int i=0;i<m;i++){
-            if(plot[i][0] >=h){
-                valid[i][0] = ((i-1)>=0) ? 1 + valid[i-1][0] : 1; 
-            }
-            else{
-                valid[i][0] = ((i-1)>=0) ? valid[i-1][0] : 0; 
-            }
+        // Fill the first row and coloum with 0 as this is the extra row and coloum added for easy implementation
+        Arrays.fill(valid[0],0);
+        for(int i=0;i<m+1;i++){
+            valid[i][0] = 0;
         }
 
         // Precopmute the number of valid plots from (0,0) to (i,j) for all other points
         int left,diagonal,top;
-        for(int i=1;i<m;i++){
-            for(int j=1;j<n;j++){
+        for(int i=1;i<=m;i++){
+            for(int j=1;j<=n;j++){
                 left = valid[i][j-1];
                 diagonal = valid[i-1][j-1];
                 top = valid[i-1][j];
-                /*  Number of valid plots from (0,0) to (i,j) is the sum of number of valid plots from (0,0) to (i,j-1)
+                 /*  Number of valid plots from (0,0) to (i,j) is the sum of number of valid plots from (0,0) to (i,j-1)
                 *  (0,0) TO (i-1,j) minus (0,0) to (i-1,j-1) as this sum is counted two times
                 */
-                valid[i][j] = (plot[i][j] >=h ) ? (left+top-diagonal)+1 : (left+top-diagonal);
+                valid[i][j] = (plot[i-1][j-1] >=h ) ? (left+top-diagonal)+1 : (left+top-diagonal);
             }
         }
 
@@ -70,12 +59,12 @@ public class Task4 {
             for(int j=0; j<n; j++){
                 // Increment along the diagonal
                 for(int k=0; k<(Math.min(m-i, n-j)); k++){
-                    topLeft = (i!=0 && j!=0) ? valid[i-1][j-1] : 0;
-                    bottomRight = valid[i+k][j+k];
-                    validPlotCount = bottomRight;
-                    if(i!=0 && j!=0){
-                        validPlotCount = validPlotCount - valid[i-1][j+k] - valid[i+k][j-1] + topLeft;
-                    }
+                    topLeft = valid[i][j];
+                    bottomRight = valid[i+1+k][j+1+k];
+                    // Valid plots from (i,j) to (i+k,j+k) is the sum of valid plots from (0,0) to (i+k,j+k) minus the sum of valid plots from (0,0) to (i,0) & 
+                    // (0,0) to (i-1,j-1) is deducted twice so add it back
+                    validPlotCount = bottomRight - valid[i][j+k+1] - valid[i+k+1][j] + topLeft;
+                    // Invalid count is totalArea - validCount;
                     invalidPlotCount = ((k +1)*(k+1) - validPlotCount);
 
                     // If the invalid count is greater than 4 then this cannot be our answer
