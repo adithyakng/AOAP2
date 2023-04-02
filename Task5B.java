@@ -68,12 +68,26 @@ public class Task5B {
                 if(i == 0 || j == 0){
                     // If the plot is in the first row or first coloumn then it will act as a corner plot and the area will be 1
                     dp[i][j] = 1;
-                    maxArea = Math.max(maxArea,1);
+                    min = 0;
+                    if(((min+1)*(min+1)) > maxArea){
+                        maxArea = (min+1) * (min+1);
+                        ans[0] = (i-min+1); //x1
+                        ans[1] = (i+1); //x2
+                        ans[2] = (j+1-min); // y1
+                        ans[3] = (j+1); // y2
+                    }
                 }
                 else if((i == 1 && j>=1) || (j==1 && i>=1)){
                      // If the plot is in the second row or second coloumn then all 4 plots will act as a corner plot and the area will be 2
                     dp[i][j] = 2;
-                    maxArea = Math.max(maxArea,2);
+                    min = 1;
+                    if(((min+1)*(min+1)) > maxArea){
+                        maxArea = (min+1) * (min+1);
+                        ans[0] = (i-min+1); //x1
+                        ans[1] = (i+1); //x2
+                        ans[2] = (j+1-min); // y1
+                        ans[3] = (j+1); // y2
+                    }
                 }
                 else{
                     min = getMinimum(dp[i-1][j-1],dp[i-1][j],dp[i][j-1]);
