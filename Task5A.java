@@ -68,7 +68,7 @@ public class Task5A {
         if(i <0 || j<0){
             return 0;
         }
-        if( i == 0 && j ==0 ){
+        if( i == 0 || j ==0 ){
             maxSize = Math.max(maxSize,1);
             ans[0] = ans[1] = ans[2] = ans[3] = i+1;
             return 1;
@@ -77,8 +77,8 @@ public class Task5A {
             // If the plot is in the second row or second coloumn then all 4 plots will act as a corner plot and the area will be 2
             maxSize = Math.max(maxSize,2);
             ans[0] = 1;
-            ans[1] = 1;
-            ans[2] = 2;
+            ans[1] = 2;
+            ans[2] = 1;
             ans[3] = 2;
             return 2;
            
@@ -86,12 +86,15 @@ public class Task5A {
 
         if(dp[i-1][j-1] == -1) {
             dp[i-1][j-1] = calculateMaxArea(valid,dp,i-1,j-1,ans,maxSize, plot, h);
+            maxSize = Math.max(maxSize,dp[i-1][j-1]);
         }
         if(dp[i-1][j] == -1) {
             dp[i-1][j] = calculateMaxArea(valid, dp, i-1, j, ans, maxSize, plot, h);
+            maxSize = Math.max(maxSize,dp[i-1][j]);
         }
         if(dp[i][j-1] == -1){
             dp[i][j-1] = calculateMaxArea(valid, dp, i, j-1, ans, maxSize, plot, h);
+            maxSize = Math.max(maxSize,dp[i][j-1]);
         }
         int min = getMinimum(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]);
         int validPlotCount = getValidCount(i+1,j+1,min, valid);

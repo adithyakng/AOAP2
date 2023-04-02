@@ -1,0 +1,77 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Task1",
+            "request": "launch",
+            "mainClass": "Task1",
+            "projectName": "AoAProject2_2408fc56"
+        },
+        {
+            "type": "java",
+            "name": "Task1New",
+            "request": "launch",
+            "mainClass": "Task1New",
+            "projectName": "AoAProject2_2408fc56"
+        },
+        {
+            "type": "java",
+            "name": "Task2",
+            "request": "launch",
+            "mainClass": "Task2",
+            "projectName": "AoAProject2_2408fc56"
+        },
+        {
+            "type": "java",
+            "name": "Task3",
+            "request": "launch",
+            "mainClass": "Task3",
+            "projectName": "AoAProject2_2408fc56"
+        },
+        {
+            "type": "java",
+            "name": "Task4",
+            "request": "launch",
+            "mainClass": "Task4",
+            "projectName": "AoAProject2_2408fc56"
+        },
+        {
+            "type": "java",
+            "name": "Task5B",
+            "request": "launch",
+            "mainClass": "Task5B",
+            "projectName": "AoAProject2_2408fc56"
+        },
+        {
+            "type": "java",
+            "name": "Task6",
+            "request": "launch",
+            "mainClass": "Task6",
+            "projectName": "AoAProject2_2408fc56"
+        },
+        {
+            "type": "java",
+            "name": "Task6New",
+            "request": "launch",
+            "mainClass": "Task6New",
+            "projectName": "AoAProject2_2408fc56"
+        },
+        {
+            "type": "java",
+            "name": "Task7B",
+            "request": "launch",
+            "mainClass": "Task7B",
+            "projectName": "AoAProject2_2408fc56"
+        }
+    ]
+}
