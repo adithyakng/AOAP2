@@ -7,7 +7,7 @@ public class Experiment3 {
 
     public static void main(String args[]) throws IOException{
 
-        int[] inputSizes = {1000,2500,5000};
+        int[] inputSizes = {10,50,100};
         String fileName;
         BufferedReader br;
         String input[];
@@ -35,53 +35,72 @@ public class Experiment3 {
             System.out.println("k value: " +k);
             System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
             // Perform each task
-            //calculateMaxAreaForTask6(m,n,h,k,plot);
+            calculateMaxAreaForTask6(m,n,h,k,plot);
             calculateMaxAreaForTask7A(m,n,h,k,plot);
             calculateMaxAreaForTask7B(m,n,h,k,plot);
         }
     }
 
-    public static void calculateMaxAreaForTask6(int m, int n, int h, int k, int[][] plot){
+    public static void calculateMaxAreaForTask6(int m, int n, int h, int minH, int[][] plot){
+        
         System.out.println("TASK 6");
         System.out.println();
         final Instant startTime = Instant.now();
 
+        // Intially the max area of the largest subsquare possible is 0
         int maxArea = 0;
+
         int ans[] = new int[4];
         Arrays.fill(ans, -1);
-        int count = 0;
+
+        /**
+         *  Iterate over each element of the plot considering it as top left corner and 
+         *  for each top left corner consider all possible squares as bottom right corner
+         *  and check the number of elements that are < h. 
+         *  if the value <= minH then change the maxArea and update the ans array with top left and bottom right corner.
+         * */ 
         for(int i=0; i<m; i++){
             for(int j=0; j<n; j++){
-                for(int sl = 1; sl< Math.min(m-i,n-j)+1; sl++){
-                    count = 0;
-                    // Now verify for each square of size sl if atleast k elements are >=h
-                    for(int p=i; p<i+sl; p++){
-                        for(int q=j; q<j+sl; q++){
-                            if(plot[p][q] < h){
-                                count++;
+                for(int k = i; k<m; k++){
+                    for(int l = j; l<n; l++){
+                        // Check if the top left corner and bottom right corner form a square by checking the difference in their rows & columns
+                        if(l-j == k-i){
+                        
+                        // Check if values between (i,j) and (k,l) that are <h is <=minH
+                            boolean value = checkAllValues(i, j, k, l, h, minH, plot);
+
+                            // If yes, then check if the area of the square is greater than the maxArea and update the maxArea and answer coordinates
+                            if(value && (maxArea < (((k-i)+1) * ((k-i)+1)))){
+                                maxArea = ((k-i)+1) * ((k-i)+1);
+                                ans[0] = i+1; //x1
+                                ans[1] = j+1; // y1
+                                ans[2] = k+1; // x2
+                                ans[3] = l+1; //y2
                             }
                         }
-                    }
-                    // Now only upto k plots can break the minimum of h trees rule
-                    if((count <=k) &&  ((sl*sl) > maxArea)){
-                        // x1
-                        ans[0] = i+1;
-                        // x2
-                        ans[1] = i+sl;
-                        // y1
-                        ans[2] = j+1;
-                        // y2
-                        ans[3] = j+sl;
-                        maxArea = sl*sl;
                     }
                 }
             }
         }
         final Instant endTime = Instant.now();
         System.out.println("Total Plots: "+maxArea);
-        System.out.println("Coordinates: x1: " +ans[0]+" y1: "+ans[2]+" x2: "+ans[1]+" y2: "+ans[3]);
+        System.out.println("Coordinates: x1: " +ans[0]+" y1: "+ans[1]+" x2: "+ans[2]+" y2: "+ans[3]);
         System.out.println("Total Time taken in nano seconds: "+(Duration.between(startTime,endTime).toNanos()));
         System.out.println("--------------------");
+    }
+
+    // Function to check the number of values between (i,j) and (k,l) that are <h is <=minH
+    public static boolean checkAllValues(int i, int j, int k, int l, int h, int minH, int[][] plot){
+        int count = 0;
+        for(int a=i; a<=k; a++){
+            for(int b=j; b<=l; b++){
+                if(plot[a][b] < h){
+                    count ++;
+                }
+            }
+        }
+        // If the values that are <h is <=minH then return true else false
+        return (count <= minH) ? true : false;
     }
 
     public static void calculateMaxAreaForTask7A(int m, int n, int h, int invalid,int[][] plot){
