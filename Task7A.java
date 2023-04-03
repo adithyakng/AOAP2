@@ -62,8 +62,8 @@ public class Task7A {
                 for(int k=0; k<(Math.min(m-i, n-j)); k++){
                     topLeft = valid[i][j];
                     bottomRight = valid[i+1+k][j+1+k];
-                    // Valid plots from (i,j) to (i+k,j+k) is the sum of valid plots from (0,0) to (i+k,j+k) minus the sum of valid plots from (0,0) to (i,0) & 
-                    // (0,0) to (i-1,j-1) is deducted twice so add it back
+                    // Valid plots from (i,j) to (i+k+1,j+k+1) is the sum of valid plots from (0,0) to (i+k+1,j+k+1) minus the sum of valid plots from (0,0) to (i,j+k+1) & (0,0) to (i+k+1,j) 
+                    // (0,0) to (i,j) is deducted twice so add it back
                     validPlotCount = bottomRight - valid[i][j+k+1] - valid[i+k+1][j] + topLeft;
                     // Invalid count is totalArea - validCount;
                     invalidPlotCount = ((k +1)*(k+1) - validPlotCount);

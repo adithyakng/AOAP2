@@ -19,7 +19,7 @@ run4:
 run5A:
 	java Task5A
 run5B:
-	java Task5A
+	java Task5B
 run6:
 	java Task6
 run7A:

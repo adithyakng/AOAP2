@@ -70,8 +70,8 @@ public class Task7B{
                     int mid = (low+high)/2;
                     int topLeft = invalidArray[i][j];
                     int bottomRight = invalidArray[i+1+mid][j+1+mid];
-                    // InValid plots from (i,j) to (i+mid,j+mid) is the sum of invalid plots from (0,0) to (i+mid,j+mid) minus the sum of invalid plots from (0,0) to (i,0) & 
-                    // (0,0) to (i-1,j-1) is deducted twice so add it back
+                    // InValid plots from (i,j) to (i+mid=1,j+mid+1) is the sum of invalid plots from (0,0) to (i+mid+1,j+mid+1) minus the sum of invalid plots from (0,0) to (i,j+k+1) & (0,0) to (i+k+1,j) 
+                    // (0,0) to (i,j) is deducted twice so add it back
                     int invalidPlotCount = bottomRight - invalidArray[i][j+mid+1] - invalidArray[i+mid+1][j] + topLeft;
                     // Invalid count is totalArea - validCount;
                     if(invalidPlotCount > k){

@@ -7,7 +7,7 @@ public class Experiment1 {
 
     public static void main(String args[]) throws IOException{
 
-        int[] inputSizes = {10,20,50};
+        int[] inputSizes = {1000,5000,10000};
         String fileName;
         BufferedReader br;
         String input[];

@@ -3,7 +3,7 @@
 import random
 
 
-input = [100,500,1000]
+input = [1000]
 for i in range(len(input)):
     inputList = []
     m = input[i]
